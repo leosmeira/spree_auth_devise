@@ -13,17 +13,17 @@ Spree::Core::Engine.add_routes do
   devise_scope :spree_user do
     get '/login' => 'user_sessions#new', :as => :login
     post '/login' => 'user_sessions#create', :as => :create_new_session
-    get '/logout' => 'user_sessions#destroy', :as => :logout
-    get '/signup' => 'user_registrations#new', :as => :signup
-    post '/signup' => 'user_registrations#create', :as => :registration
-    get '/password/recover' => 'user_passwords#new', :as => :recover_password
-    post '/password/recover' => 'user_passwords#create', :as => :reset_password
-    get '/password/change' => 'user_passwords#edit', :as => :edit_password
-    put '/password/change' => 'user_passwords#update', :as => :update_password
+    get '/sair' => 'user_sessions#destroy', :as => :logout
+    get '/criar-conta' => 'user_registrations#new', :as => :signup
+    post '/criar-conta' => 'user_registrations#create', :as => :registration
+    get '/senha/recuperar' => 'user_passwords#new', :as => :recover_password
+    post '/senha/recuperar' => 'user_passwords#create', :as => :reset_password
+    get '/senha/alterar' => 'user_passwords#edit', :as => :edit_password
+    put '/senha/alterar' => 'user_passwords#update', :as => :update_password
   end
 
-  get '/checkout/registration' => 'checkout#registration', :as => :checkout_registration
-  put '/checkout/registration' => 'checkout#update_registration', :as => :update_checkout_registration
+  get '/finalizar-pedido/registro' => 'checkout#registration', :as => :checkout_registration
+  put '/finalizar-pedido/registro' => 'checkout#update_registration', :as => :update_checkout_registration
 
   resource :session do
     member do
@@ -42,10 +42,10 @@ Spree::Core::Engine.add_routes do
                :path_names => { :sign_out => 'logout' },
                :path_prefix => :user
     devise_scope :spree_user do
-      get '/authorization_failure', :to => 'user_sessions#authorization_failure', :as => :unauthorized
+      get '/falha-de-autorizacao', :to => 'user_sessions#authorization_failure', :as => :unauthorized
       get '/login' => 'user_sessions#new', :as => :login
       post '/login' => 'user_sessions#create', :as => :create_new_session
-      get '/logout' => 'user_sessions#destroy', :as => :logout
+      get '/sair' => 'user_sessions#destroy', :as => :logout
     end
 
   end
